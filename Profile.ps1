@@ -1,11 +1,14 @@
 ###### START aliases ######
 
+function play { cd $HOME\playground }
+function docs { cd $HOME\playground\Documents }
+
 # connection related
 function as {
     param(
         [string]$server
     )
-    $sshCommand = "ssh $USER@elvis0$server.kaist.ac.kr"
+    $sshCommand = "ssh gun@elvis0$server.kaist.ac.kr"
     Invoke-Expression $sshCommand
 }
 
@@ -13,13 +16,13 @@ function a {
     param(
         [string]$server
     )
-    $sshCommand = "ssh $USER@elvis$server.kaist.ac.kr"
+    $sshCommand = "ssh gun@elvis$server.kaist.ac.kr"
     Invoke-Expression $sshCommand
 }
 
 # app related
 function gas { & 'C:\Program Files (x86)\Hourglass\Hourglass.exe' --title $args[0] $args[1] }
-function t { C:\Program Files\AutoHotkey\v2.0.16\AutoHotkey64.exe C:\Users\anat0my\playground\script\win\AutoHotkey\tmux.ahk }
+function t { C:\Program Files\AutoHotkey\v2.0.16\AutoHotkey64.exe $HOME\playground\script\win\AutoHotkey\tmux.ahk }
 # git related
 Set-Alias g git
 
@@ -37,41 +40,6 @@ function aed {
     & git add -A
     & git commit --amend --no-edit
     & git push --force origin $args[0]
-}
-
-function acsa {
-    & git add -A
-    & git commit -m "$args[0]"
-    & git push --all
-}
-
-function gezs {
-    & cp $HOME\.gitconfig $HOME\playground\win-environment\win\.gitconfig
-    & cd $HOME\playground\win-environment\
-    & git pc '[win][.gitconfig]'
-}
-
-# terminal related
-function vzsr { notepad $PROFILE.CurrentUserAllHosts }
-
-function fetchv {
-	cp $HOME\playground\win-environment\win\Profile.ps1 $PROFILE.CurrentUserAllHosts
-}
-
-function vezs {
-    & cp $PROFILE.CurrentUserAllHosts $HOME\playground\win-environment\win\Profile.ps1
-    & cd $HOME\playground\win-environment\
-    & git pc '[win][Profile.ps1]'
-}
-
-function gzsr { notepad $HOME\.gitconfig }
-function fetchg {
-	cp $HOME\playground\win-environment\linux\.gitconfig $HOME\.gitconfig
-}
-function gezs {
-    & cp $HOME\.gitconfig $HOME\playground\win-environment\linux\.gitconfig
-    & cd $HOME\playground\win-environment\
-    & git pc '[win][Profile.ps1]'
 }
 
 function Get-CommitHash {
@@ -109,33 +77,18 @@ function Git-Url {
     Remove-Item $outputFile
 }
 
-function gput { Git-Url pull upstream topuzz }
 function gpum { Git-Url pull upstream main }
 function gpuma { Git-Url pull upstream master }
-function gpot { Git-Url pull origin topuzz }
 function gpom { Git-Url pull origin main }
 function gpoma { Git-Url pull origin master }
-
-function gpushut { Git-Url push upstream topuzz }
 function gpushum { Git-Url push upstream main }
 function gpushuma { Git-Url push upstream master }
-function gpushot { Git-Url push origin topuzz }
 function gpushom { Git-Url push origin main }
 function gpushoma { Git-Url push origin master }
-function gpushfut { Git-Url push -f upstream topuzz }
 function gpushfum { Git-Url push -f upstream main }
 function gpushfuma { Git-Url push -f upstream master }
-function gpushfot { Git-Url push -f origin topuzz }
 function gpushfom { Git-Url push -f origin main }
 function gpushfoma { Git-Url push -f origin master }
-
-function greset { git reset --hard }
-function gresetut { greset upstream/topuzz }
-function gresetum { greset upstream/main }
-function gresetuma { greset upstream/master }
-function gresetot { greset origin/topuzz }
-function gresetom { greset origin/main }
-function gresetoma { greset origin/master }
 
 function grrou { git rrou }
 
@@ -160,6 +113,20 @@ function watg {
 
 function watg2 {
     Get-Content "$HOME\.gitconfig" | Select-String -Pattern '.*' -Context 0,2 | Select-Object LineNumber, Line
+}
+
+# environment
+function vzsr { notepad $HOME\playground\environment\Profile.ps1 }
+function gzsr { notepad $HOME\playground\environment\linux-environment\.gitconfig }
+function vezs {
+    & cd $HOME\playground\environment\
+    & git pc 'Profile.ps1'
+}
+function gezs {
+    & cd $HOME\playground\environment\linux-environment\
+    & git pc '.gitconfig'
+    & cd ..\
+    & git pc '.gitconfig'
 }
 
 ###### END aliases ######

@@ -1,0 +1,4 @@
+[submodule "linux-environment"]
+	path = linux-environment
+	url = https://github.com/Re-st/environment
+	branch = private
